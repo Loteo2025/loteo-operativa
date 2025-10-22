@@ -169,24 +169,16 @@
 
 /* ======= ESTILOS BASE ======= */
 body {
-  background-color: var(--background);
   font-family: var(--font-inter, Arial, Helvetica, sans-serif);
 }
 
 h1,h2,h3,h4,h5,h6 {
   color: var(--text);
-  font-weight: 600;
-}
-
-a {
-  color: var(--primary-700);
-  font-weight: 500;
 }
 
 p, li, span {
-  color: var(--text-light);
   line-height: 1.6;
-  font-weight: 500;
+
 }
 
 /* ======= MODO OSCURO OPCIONAL ======= */
@@ -238,7 +230,7 @@ p, li, span {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background;
   }
 
   .bg-login-image {
