@@ -1,9 +1,10 @@
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
 
 export default function Home() {
+  const fly = false;
   return (
     <div>
-      <Button>Click me</Button>
+      <Link href={"/login"}>Login</Link>
     </div>
   );
 }

@@ -240,4 +240,10 @@ p, li, span {
   body {
     @apply bg-background text-foreground;
   }
+
+  .bg-login-image {
+    background-image: url('/bg-login.webp');
+    background-size: cover;
+    background-position: center;
+  }
 }
