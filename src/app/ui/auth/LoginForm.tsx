@@ -4,7 +4,7 @@ import Link from "next/link";
 const LoginForm = () => {
   return (
     <>
-      <div className="flex min-h-full w-[90%] flex-col justify-center px-6 py-8 lg:px-8 bg-white/90 rounded-lg">
+      <div className="flex min-h-full w-full max-w-sm md:max-w-lg lg:max-w-xl flex-col justify-center px-6 py-8 lg:px-8 bg-white/90 rounded-lg">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
             width={140}
@@ -70,7 +70,7 @@ const LoginForm = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary "
+                className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-primary-600 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all "
               >
                 Iniciar sesión
               </button>
