@@ -1,7 +1,38 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { loginSchema } from "@/lib/login.schema";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {  useState } from "react";
 
 const LoginForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    mode: "onChange",
+  });
+
+  const submit = (data: any) => {
+    setIsSubmitting(true);
+    try {
+      console.log("Login Click", data);
+    } catch (error: any) {
+      console.log(errors);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <div className="flex min-h-full w-full max-w-sm md:max-w-lg lg:max-w-xl flex-col justify-center px-6 py-8 lg:px-8 bg-white/90 rounded-lg">
@@ -16,7 +47,7 @@ const LoginForm = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit(submit)}>
             <div>
               <label
                 htmlFor="email"
@@ -25,15 +56,28 @@ const LoginForm = () => {
                 Correo
               </label>
               <div className="mt-2">
-                <input
-                  id="email"
+                <Controller
+                  control={control}
                   name="email"
-                  type="email"
-                  placeholder="micuenta@gmail.com"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-sm px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-secondary-400 placeholder:text-secondary-400/90 focus:outline-2 focus:-outline-offset-2 focus:outline-secondary-400 sm:text-sm/6"
+                  render={({ field: { onChange, value } }) => (
+                    <input
+                      id="email"
+                      name="email"
+                      value={value}
+                      required
+                      type="email"
+                      placeholder="micuenta@gmail.com"
+                      onChange={onChange}
+                      autoComplete="email"
+                      className="block w-full rounded-sm px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-secondary-400 placeholder:text-secondary-400/90 focus:outline-2 focus:-outline-offset-2 focus:outline-secondary-400 sm:text-sm/6"
+                    />
+                  )}
                 />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -55,15 +99,28 @@ const LoginForm = () => {
                 </div>
               </div>
               <div className="mt-2">
-                <input
-                  id="password"
+                <Controller
+                  control={control}
                   name="password"
-                  type="password"
-                  placeholder="********"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-sm px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-secondary-400 placeholder:text-secondary-400/90 focus:outline-2 focus:-outline-offset-2 focus:outline-secondary-400 sm:text-sm/6"
+                  render={({ field: { onChange, value } }) => (
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      required
+                      placeholder="********"
+                      value={value}
+                      onChange={onChange}
+                      autoComplete="current-password"
+                      className="block w-full rounded-sm px-3 py-1.5 text-base outline-1 -outline-offset-1 outline-secondary-400 placeholder:text-secondary-400/90 focus:outline-2 focus:-outline-offset-2 focus:outline-secondary-400 sm:text-sm/6"
+                    />
+                  )}
                 />
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -78,7 +135,7 @@ const LoginForm = () => {
           </form>
 
           <p className="mt-10 text-center">
-          Tu lote navideño <span className="text-primary">personalizado</span>
+            Tu lote navideño <span className="text-primary">personalizado</span>
           </p>
         </div>
       </div>
